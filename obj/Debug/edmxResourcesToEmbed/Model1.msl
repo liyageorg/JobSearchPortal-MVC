@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="JOB_SEARCHModelStoreContainer" CdmEntityContainer="JOB_SEARCHEntities">
+    <EntitySetMapping Name="companies">
+      <EntityTypeMapping TypeName="JOB_SEARCHModel.company">
+        <MappingFragment StoreEntitySet="company">
+          <ScalarProperty Name="cmp_id" ColumnName="cmp_id" />
+          <ScalarProperty Name="cmp_name" ColumnName="cmp_name" />
+          <ScalarProperty Name="cmp_email" ColumnName="cmp_email" />
+          <ScalarProperty Name="cmp_phone" ColumnName="cmp_phone" />
+          <ScalarProperty Name="cmp_desc" ColumnName="cmp_desc" />
+          <ScalarProperty Name="cmp_address" ColumnName="cmp_address" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="job_application">
+      <EntityTypeMapping TypeName="JOB_SEARCHModel.job_application">
+        <MappingFragment StoreEntitySet="job_application">
+          <ScalarProperty Name="apply_id" ColumnName="apply_id" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="job_id" ColumnName="job_id" />
+          <ScalarProperty Name="apply_date" ColumnName="apply_date" />
+          <ScalarProperty Name="resume" ColumnName="resume" />
+          <ScalarProperty Name="appli_status" ColumnName="appli_status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="job_posting">
+      <EntityTypeMapping TypeName="JOB_SEARCHModel.job_posting">
+        <MappingFragment StoreEntitySet="job_posting">
+          <ScalarProperty Name="job_id" ColumnName="job_id" />
+          <ScalarProperty Name="cmp_id" ColumnName="cmp_id" />
+          <ScalarProperty Name="job_title" ColumnName="job_title" />
+          <ScalarProperty Name="job_desc" ColumnName="job_desc" />
+          <ScalarProperty Name="location" ColumnName="location" />
+          <ScalarProperty Name="salary" ColumnName="salary" />
+          <ScalarProperty Name="quali" ColumnName="quali" />
+          <ScalarProperty Name="exp" ColumnName="exp" />
+          <ScalarProperty Name="last_date" ColumnName="last_date" />
+          <ScalarProperty Name="job_status" ColumnName="job_status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="logins">
+      <EntityTypeMapping TypeName="JOB_SEARCHModel.login">
+        <MappingFragment StoreEntitySet="login">
+          <ScalarProperty Name="login_id" ColumnName="login_id" />
+          <ScalarProperty Name="reg_id" ColumnName="reg_id" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="login_status" ColumnName="login_status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="userts">
+      <EntityTypeMapping TypeName="JOB_SEARCHModel.usert">
+        <MappingFragment StoreEntitySet="usert">
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="quali" ColumnName="quali" />
+          <ScalarProperty Name="expe" ColumnName="expe" />
+          <ScalarProperty Name="skills" ColumnName="skills" />
+          <ScalarProperty Name="user_status" ColumnName="user_status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="sp_cmpreg" FunctionName="JOB_SEARCHModel.Store.sp_cmpreg" />
+    <FunctionImportMapping FunctionImportName="sp_countid" FunctionName="JOB_SEARCHModel.Store.sp_countid" />
+    <FunctionImportMapping FunctionImportName="sp_jobpost" FunctionName="JOB_SEARCHModel.Store.sp_jobpost" />
+    <FunctionImportMapping FunctionImportName="sp_loginid" FunctionName="JOB_SEARCHModel.Store.sp_loginid" />
+    <FunctionImportMapping FunctionImportName="sp_logininsert" FunctionName="JOB_SEARCHModel.Store.sp_logininsert" />
+    <FunctionImportMapping FunctionImportName="sp_logstatus" FunctionName="JOB_SEARCHModel.Store.sp_logstatus" />
+    <FunctionImportMapping FunctionImportName="sp_maxid" FunctionName="JOB_SEARCHModel.Store.sp_maxid" />
+    <FunctionImportMapping FunctionImportName="sp_userreg" FunctionName="JOB_SEARCHModel.Store.sp_userreg" />
+  </EntityContainerMapping>
+</Mapping>

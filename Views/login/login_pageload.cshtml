@@ -1,0 +1,127 @@
+﻿@model JOB_SEARCH.Models.login
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .login-wrapper {
+        min-height: 80vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #f4f7fb;
+    }
+
+    .login-card {
+        width: 420px;
+        padding: 40px;
+        background: #ffffff;
+        border-radius: 14px;
+        box-shadow: 0px 8px 25px rgba(0,0,0,0.12);
+    }
+
+        .login-card h2 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .login-card p {
+            text-align: center;
+            color: #777;
+            margin-bottom: 30px;
+        }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    label {
+        font-weight: bold;
+        color: #34495e;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 11px;
+        margin-top: 6px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+    }
+
+    .btn-login {
+        width: 100%;
+        padding: 12px;
+        background-color: #007bff;
+        border: none;
+        color: white;
+        font-size: 16px;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+
+        .btn-login:hover {
+            background-color: #0056b3;
+        }
+
+    .text-danger {
+        color: red;
+        font-size: 14px;
+    }
+
+    .msg {
+        text-align: center;
+        color: red;
+        font-weight: bold;
+        margin-top: 15px;
+    }
+
+    .register-links {
+        text-align: center;
+        margin-top: 20px;
+        font-size: 14px;
+    }
+
+        .register-links a {
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+        }
+</style>
+
+<div class="login-wrapper">
+    <div class="login-card">
+
+        <h2>Job Portal Login</h2>
+        <p>Login to continue your job search or company dashboard</p>
+
+        @using (Html.BeginForm("login_click", "login", FormMethod.Post))
+        {
+            <div class="form-group">
+                <label>Username</label>
+                @Html.TextBoxFor(m => m.username, new { @class = "form-control", placeholder = "Enter username" })
+                @Html.ValidationMessageFor(m => m.username, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                <label>Password</label>
+                @Html.PasswordFor(m => m.password, new { @class = "form-control", placeholder = "Enter password" })
+                @Html.ValidationMessageFor(m => m.password, "", new { @class = "text-danger" })
+            </div>
+
+            <input type="submit" value="Login" class="btn-login" />
+
+            <div class="msg">
+                @Html.DisplayFor(m => m.msg)
+            </div>
+        }
+
+        <div class="register-links">
+            New user? <a href="/userr/insertuser_pageload">Register</a> |
+            Company? <a href="/company/insertcompany_pageload">Register</a>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,87 @@
+﻿@model JOB_SEARCH.Models.chome
+@{
+    ViewBag.Title = "chome_pageload";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>chome_pageload</h2>
+
+@{
+    ViewBag.Title = "Post Job";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 style="text-align:center; margin-top:20px;">Post New Job</h2>
+
+@using (Html.BeginForm("chome_click", "chome", FormMethod.Post))
+{
+    <div style="width:50%; margin:auto; padding:30px; border:1px solid lightgray; border-radius:10px; background-color:#f9f9f9;">
+
+        <div>
+            <label>Job Title</label>
+            @Html.TextBoxFor(m => m.job_title, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.job_title)
+        </div>
+
+        <br />
+
+        <div>
+            <label>Job Description</label>
+            @Html.TextAreaFor(m => m.job_desc, new { @class = "form-control", rows = 4 })
+            @Html.ValidationMessageFor(m => m.job_desc)
+        </div>
+
+        <br />
+
+        <div>
+            <label>Location</label>
+            @Html.TextBoxFor(m => m.location, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.location)
+        </div>
+
+        <br />
+
+        <div>
+            <label>Salary</label>
+            @Html.TextBoxFor(m => m.salary, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.salary)
+        </div>
+
+        <br />
+
+        <div>
+            <label>Qualification</label>
+            @Html.TextBoxFor(m => m.qualification, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.qualification)
+        </div>
+
+        <br />
+
+        <div>
+            <label>Experience</label>
+            @Html.TextBoxFor(m => m.experience, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.experience)
+        </div>
+
+        <br />
+
+        <div>
+            <label>Last Date</label>
+            @Html.TextBoxFor(m => m.last_date, new { @type = "date", @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.last_date)
+        </div>
+
+        <br />
+
+        <div style="text-align:center;">
+            <input type="submit" value="Post Job" class="btn btn-primary" />
+        </div>
+
+        <br />
+
+        <div style="text-align:center; color:green;">
+            @(Model != null ? Model.msg : "")
+        </div>
+
+    </div>
+}
