@@ -208,5 +208,52 @@ namespace JOB_SEARCH
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_userreg", uidParameter, unaParameter, uphParameter, uemParameter, uaddrParameter, uquaParameter, uexpParameter, uskillParameter, ustParameter);
         }
+    
+        public virtual int sp_jobsearch(string qry)
+        {
+            var qryParameter = qry != null ?
+                new ObjectParameter("qry", qry) :
+                new ObjectParameter("qry", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_jobsearch", qryParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> sp_appliid(Nullable<int> job_id, Nullable<int> user_id)
+        {
+            var job_idParameter = job_id.HasValue ?
+                new ObjectParameter("job_id", job_id) :
+                new ObjectParameter("job_id", typeof(int));
+    
+            var user_idParameter = user_id.HasValue ?
+                new ObjectParameter("user_id", user_id) :
+                new ObjectParameter("user_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("sp_appliid", job_idParameter, user_idParameter);
+        }
+    
+        public virtual int sp_appliinsert(Nullable<int> user_id, Nullable<int> job_id, Nullable<System.DateTime> apply_date, string resume, string appli_status)
+        {
+            var user_idParameter = user_id.HasValue ?
+                new ObjectParameter("user_id", user_id) :
+                new ObjectParameter("user_id", typeof(int));
+    
+            var job_idParameter = job_id.HasValue ?
+                new ObjectParameter("job_id", job_id) :
+                new ObjectParameter("job_id", typeof(int));
+    
+            var apply_dateParameter = apply_date.HasValue ?
+                new ObjectParameter("apply_date", apply_date) :
+                new ObjectParameter("apply_date", typeof(System.DateTime));
+    
+            var resumeParameter = resume != null ?
+                new ObjectParameter("resume", resume) :
+                new ObjectParameter("resume", typeof(string));
+    
+            var appli_statusParameter = appli_status != null ?
+                new ObjectParameter("appli_status", appli_status) :
+                new ObjectParameter("appli_status", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_appliinsert", user_idParameter, job_idParameter, apply_dateParameter, resumeParameter, appli_statusParameter);
+        }
     }
 }

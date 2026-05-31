@@ -61,6 +61,17 @@
     <Property Name="skills" Type="varchar" MaxLength="200" Nullable="false" />
     <Property Name="user_status" Type="varchar" MaxLength="50" Nullable="false" />
   </EntityType>
+  <Function Name="sp_appliid" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="job_id" Type="int" Mode="In" />
+    <Parameter Name="user_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_appliinsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="user_id" Type="int" Mode="In" />
+    <Parameter Name="job_id" Type="int" Mode="In" />
+    <Parameter Name="apply_date" Type="date" Mode="In" />
+    <Parameter Name="resume" Type="varchar" Mode="In" />
+    <Parameter Name="appli_status" Type="varchar" Mode="In" />
+  </Function>
   <Function Name="sp_cmpreg" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="cid" Type="int" Mode="In" />
     <Parameter Name="cna" Type="varchar" Mode="In" />
@@ -83,6 +94,9 @@
     <Parameter Name="experience" Type="varchar" Mode="In" />
     <Parameter Name="last_date" Type="date" Mode="In" />
     <Parameter Name="job_status" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="sp_jobsearch" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="qry" Type="nvarchar(max)" Mode="In" />
   </Function>
   <Function Name="sp_loginid" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="una" Type="varchar" Mode="In" />

@@ -116,5 +116,19 @@
       <Parameter Name="uskill" Mode="In" Type="String" />
       <Parameter Name="ust" Mode="In" Type="String" />
     </FunctionImport>
+    <FunctionImport Name="sp_jobsearch">
+      <Parameter Name="qry" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_appliid" ReturnType="Collection(Int32)">
+      <Parameter Name="job_id" Mode="In" Type="Int32" />
+      <Parameter Name="user_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_appliinsert">
+      <Parameter Name="user_id" Mode="In" Type="Int32" />
+      <Parameter Name="job_id" Mode="In" Type="Int32" />
+      <Parameter Name="apply_date" Mode="In" Type="DateTime" />
+      <Parameter Name="resume" Mode="In" Type="String" />
+      <Parameter Name="appli_status" Mode="In" Type="String" />
+    </FunctionImport>
   </EntityContainer>
 </Schema>

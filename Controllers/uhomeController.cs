@@ -2,6 +2,9 @@
 using System.Linq;
 using System.Web.Mvc;
 using JOB_SEARCH.Models;
+using System.Data;
+using System.Data.SqlClient;
+using System.Configuration;
 
 namespace JOB_SEARCH.Controllers
 {
@@ -14,9 +17,9 @@ namespace JOB_SEARCH.Controllers
             return View(GetJobList());
         }
 
-        private uhome GetJobList()
+        private jobsearch GetJobList()
         {
-            var joblists = new uhome();
+            var joblists = new jobsearch();
 
             var jobs = objdb.job_posting
                             .Where(j => j.job_status == "available")
@@ -46,7 +49,66 @@ namespace JOB_SEARCH.Controllers
         public ActionResult ApplyNow(int id)
         {
             Session["job_id"] = id;
-            return RedirectToAction("Applyjob_pageload", "Applyjob");
+            return RedirectToAction("applyjob_pageload", "Applyjob");
         }
+
+        public ActionResult searchjob_click(jobsearch clsobj)
+        {
+            string qry = "";
+
+            if (!string.IsNullOrWhiteSpace(clsobj.insertse.experience))
+            {
+                qry += " and exp like '%" + clsobj.insertse.experience + "%'";
+            }
+
+            if (!string.IsNullOrWhiteSpace(clsobj.insertse.qualification))
+            {
+                qry += " and quali like '%" + clsobj.insertse.qualification + "%'";
+            }
+
+            if (!string.IsNullOrWhiteSpace(clsobj.insertse.location))
+            {
+                qry += " and location like '%" + clsobj.insertse.location + "%'";
+            }
+
+            return View("uhome_pageload", getdata(clsobj, qry));
+        }
+
+        private jobsearch getdata(jobsearch clsobj, string qry)
+        {
+            using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["JOB_SEARCHConnectionString"].ConnectionString))
+            {
+                SqlCommand cmd = new SqlCommand("sp_jobsearch", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@qry", qry);
+
+                con.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                var joblist = new jobsearch();
+
+                while (dr.Read())
+                {
+                    var jobcls = new jobList();
+
+                    jobcls.job_id = Convert.ToInt32(dr["job_id"]);
+                    jobcls.cmp_id = Convert.ToInt32(dr["cmp_id"]);
+                    jobcls.job_title = dr["job_title"].ToString();
+                    jobcls.job_desc = dr["job_desc"].ToString();
+                    jobcls.location = dr["location"].ToString();
+                    jobcls.salary = dr["salary"].ToString();
+                    jobcls.qualification = dr["quali"].ToString();
+                    jobcls.experience = dr["exp"].ToString();
+                    jobcls.last_date = Convert.ToDateTime(dr["last_date"]);
+                    jobcls.job_status = dr["job_status"].ToString();
+
+                    joblist.selectjob.Add(jobcls);
+                }
+
+                con.Close();
+                return joblist;
+            }
+        }
+
     }
 }

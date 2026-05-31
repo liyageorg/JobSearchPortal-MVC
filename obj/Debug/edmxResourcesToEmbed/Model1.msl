@@ -75,5 +75,8 @@
     <FunctionImportMapping FunctionImportName="sp_logstatus" FunctionName="JOB_SEARCHModel.Store.sp_logstatus" />
     <FunctionImportMapping FunctionImportName="sp_maxid" FunctionName="JOB_SEARCHModel.Store.sp_maxid" />
     <FunctionImportMapping FunctionImportName="sp_userreg" FunctionName="JOB_SEARCHModel.Store.sp_userreg" />
+    <FunctionImportMapping FunctionImportName="sp_jobsearch" FunctionName="JOB_SEARCHModel.Store.sp_jobsearch" />
+    <FunctionImportMapping FunctionImportName="sp_appliid" FunctionName="JOB_SEARCHModel.Store.sp_appliid" />
+    <FunctionImportMapping FunctionImportName="sp_appliinsert" FunctionName="JOB_SEARCHModel.Store.sp_appliinsert" />
   </EntityContainerMapping>
 </Mapping>

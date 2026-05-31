@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="JOB_SEARCHModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="JOB_SEARCHModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="company">
           <Key>
             <PropertyRef Name="cmp_id" />
@@ -66,6 +66,17 @@
           <Property Name="skills" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="user_status" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <Function Name="sp_appliid" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="job_id" Type="int" Mode="In" />
+          <Parameter Name="user_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_appliinsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="user_id" Type="int" Mode="In" />
+          <Parameter Name="job_id" Type="int" Mode="In" />
+          <Parameter Name="apply_date" Type="date" Mode="In" />
+          <Parameter Name="resume" Type="varchar" Mode="In" />
+          <Parameter Name="appli_status" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="sp_cmpreg" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="cid" Type="int" Mode="In" />
           <Parameter Name="cna" Type="varchar" Mode="In" />
@@ -88,6 +99,9 @@
           <Parameter Name="experience" Type="varchar" Mode="In" />
           <Parameter Name="last_date" Type="date" Mode="In" />
           <Parameter Name="job_status" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_jobsearch" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="qry" Type="nvarchar(max)" Mode="In" />
         </Function>
         <Function Name="sp_loginid" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="una" Type="varchar" Mode="In" />
@@ -122,8 +136,7 @@
           <EntitySet Name="login" EntityType="Self.login" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="usert" EntityType="Self.usert" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="JOB_SEARCHModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -243,6 +256,20 @@
             <Parameter Name="uskill" Mode="In" Type="String" />
             <Parameter Name="ust" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="sp_jobsearch">
+          <Parameter Name="qry" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_appliid" ReturnType="Collection(Int32)">
+            <Parameter Name="job_id" Mode="In" Type="Int32" />
+            <Parameter Name="user_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_appliinsert">
+            <Parameter Name="user_id" Mode="In" Type="Int32" />
+            <Parameter Name="job_id" Mode="In" Type="Int32" />
+            <Parameter Name="apply_date" Mode="In" Type="DateTime" />
+            <Parameter Name="resume" Mode="In" Type="String" />
+            <Parameter Name="appli_status" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -324,6 +351,9 @@
           <FunctionImportMapping FunctionImportName="sp_logstatus" FunctionName="JOB_SEARCHModel.Store.sp_logstatus" />
           <FunctionImportMapping FunctionImportName="sp_maxid" FunctionName="JOB_SEARCHModel.Store.sp_maxid" />
           <FunctionImportMapping FunctionImportName="sp_userreg" FunctionName="JOB_SEARCHModel.Store.sp_userreg" />
+          <FunctionImportMapping FunctionImportName="sp_jobsearch" FunctionName="JOB_SEARCHModel.Store.sp_jobsearch" />
+          <FunctionImportMapping FunctionImportName="sp_appliid" FunctionName="JOB_SEARCHModel.Store.sp_appliid" />
+          <FunctionImportMapping FunctionImportName="sp_appliinsert" FunctionName="JOB_SEARCHModel.Store.sp_appliinsert" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -131,6 +131,7 @@
     <Compile Include="company.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\applyjobController.cs" />
     <Compile Include="Controllers\chomeController.cs" />
     <Compile Include="Controllers\companyController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -164,8 +165,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\applyjob.cs" />
     <Compile Include="Models\chome.cs" />
     <Compile Include="Models\cmpins.cs" />
+    <Compile Include="Models\jobsearch.cs" />
     <Compile Include="Models\login.cs" />
     <Compile Include="Models\uhome.cs" />
     <Compile Include="Models\userins.cs" />
@@ -232,8 +235,10 @@
     <Content Include="Views\userr\insertuser_pageload.cshtml" />
     <Content Include="Views\chome\chome_pageload.cshtml" />
     <Content Include="Views\uhome\uhome_pageload.cshtml" />
+    <Content Include="Views\applyjob\applyjob_pageload.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="ApplicationResume\" />
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
