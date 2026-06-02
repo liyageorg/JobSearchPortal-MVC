@@ -31,5 +31,7 @@ namespace JOB_SEARCH.Models
         public DateTime last_date { get; set; }
         public string job_status { get; set; }
         public string searchdata { get; set; }
+
+        
     }
 }

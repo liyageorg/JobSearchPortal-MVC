@@ -7,6 +7,13 @@
 
 <h2>uhome_pageload</h2>
 
+@if (TempData["msg"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["msg"]
+    </div>
+}
+
 <style>
     .hero-section {
         width: 90%;
@@ -177,13 +184,22 @@
                     <td>@item.experience</td>
                     <td>@item.last_date.ToString("dd-MM-yyyy")</td>
                     <td>
-                        @Html.ActionLink(
-     "Apply Now",
-     "applyjob_pageload",
-     "Applyjob",
-     new { job_id = item.job_id },
-     new { @class = "apply-btn" }
- )
+                        @if (item.msg == "Applied")
+                        {
+                            <span class="apply-btn" style="background-color:gray;">
+                                Already Applied
+                            </span>
+                        }
+                        else
+                        {
+                            @Html.ActionLink(
+                                "Apply Now",
+                                "applyjob_pageload",
+                                "applyjob",
+                                new { job_id = item.job_id },
+                                new { @class = "apply-btn" }
+                            )
+                        }
                     </td>
                 </tr>
             }

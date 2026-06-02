@@ -27,5 +27,6 @@ namespace JOB_SEARCH.Models
         public string experience { get; set; }
         public DateTime last_date { get; set; }
         public string job_status { get; set; }
+        public string msg { get; set; }
     }
 }

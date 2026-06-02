@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -10,23 +9,35 @@ namespace JOB_SEARCH.Controllers
 {
     public class applyjobController : Controller
     {
-
         JOB_SEARCHEntities objdb = new JOB_SEARCHEntities();
-        // GET: applyjob
+
         public ActionResult applyjob_pageload(int job_id)
         {
             applyjob obj = new applyjob();
+
             Session["Job_id"] = job_id;
 
             int userid = Convert.ToInt32(Session["user_id"]);
-            int jobids = Convert.ToInt32(Session["Job_id"]);
 
-            var i = objdb.sp_appliid(jobids, userid).FirstOrDefault();
+            var i = objdb.sp_appliid(job_id, userid).FirstOrDefault();
 
             if (i == 1)
             {
                 TempData["msg"] = "You have already applied for this job";
                 return RedirectToAction("uhome_pageload", "uhome");
+            }
+
+            var job = objdb.job_posting.FirstOrDefault(j => j.job_id == job_id);
+
+            if (job != null)
+            {
+                obj.job_id = job.job_id;
+                obj.job_title = job.job_title;
+                obj.job_desc = job.job_desc;
+                obj.location = job.location;
+                obj.salary = job.salary;
+                obj.qualification = job.quali;
+                obj.experience = job.exp;   
             }
 
             return View(obj);
@@ -60,9 +71,8 @@ namespace JOB_SEARCH.Controllers
             objdb.sp_appliinsert(
                 clsobj.user_id,
                 clsobj.job_id,
-                 clsobj.apply_date,
+                clsobj.apply_date,
                 clsobj.resume,
-               
                 clsobj.apply_status
             );
 

@@ -25,6 +25,8 @@ namespace JOB_SEARCH.Controllers
                             .Where(j => j.job_status == "available")
                             .ToList();
 
+            int userid = Convert.ToInt32(Session["user_id"]);
+
             foreach (var j in jobs)
             {
                 var jobobj = new jobList();
@@ -40,6 +42,17 @@ namespace JOB_SEARCH.Controllers
                 jobobj.last_date = Convert.ToDateTime(j.last_date);
                 jobobj.job_status = j.job_status;
 
+                var applied = objdb.sp_appliid(jobobj.job_id, userid).FirstOrDefault();
+
+                if (applied == 1)
+                {
+                    jobobj.msg = "Applied";
+                }
+                else
+                {
+                    jobobj.msg = "Apply Now";
+                }
+
                 joblists.selectjob.Add(jobobj);
             }
 
@@ -49,7 +62,7 @@ namespace JOB_SEARCH.Controllers
         public ActionResult ApplyNow(int id)
         {
             Session["job_id"] = id;
-            return RedirectToAction("applyjob_pageload", "Applyjob");
+            return RedirectToAction("applyjob_pageload", "applyjob");
         }
 
         public ActionResult searchjob_click(jobsearch clsobj)

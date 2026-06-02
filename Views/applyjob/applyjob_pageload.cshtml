@@ -1,17 +1,84 @@
-﻿@model JOB_SEARCH.Models.applyjob
+﻿@*@model JOB_SEARCH.Models.applyjob
+
+    @{
+        ViewBag.Title = "applyjob_pageload";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+
+    <h2>Apply for Job</h2>
+
+    @using (Html.BeginForm("applyjob_click", "applyjob", FormMethod.Post,
+        new { enctype = "multipart/form-data" }))
+    {
+        <div>
+            <label>Upload Resume</label>
+        </div>
+
+        <div>
+            <input type="file" name="file" required />
+        </div>
+
+        <br />
+
+        <div>
+            <input type="submit" value="Apply Now" class="btn btn-primary" />
+        </div>
+
+        <div>
+            @Html.DisplayFor(m => m.msg)
+        </div>
+    }*@
+
+
+
+@model JOB_SEARCH.Models.applyjob
 
 @{
     ViewBag.Title = "applyjob_pageload";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Apply for Job</h2>
+<h2>Apply For Job</h2>
 
-@using (Html.BeginForm("applyjob_click", "applyjob", FormMethod.Post,
+<hr />
+
+<div>
+    <h3>@Model.job_title</h3>
+
+    <p>
+        <b>Description :</b>
+        @Model.job_desc
+    </p>
+
+    <p>
+        <b>Location :</b>
+        @Model.location
+    </p>
+
+    <p>
+        <b>Qualification :</b>
+        @Model.qualification
+    </p>
+
+    <p>
+        <b>Experience :</b>
+        @Model.experience
+    </p>
+
+    <p>
+        <b>Salary :</b>
+        @Model.salary
+    </p>
+</div>
+
+<hr />
+
+@using (Html.BeginForm("applyjob_click", "applyjob",
+    FormMethod.Post,
     new { enctype = "multipart/form-data" }))
 {
     <div>
-        <label>Upload Resume</label>
+        <label><b>Upload Resume</b></label>
     </div>
 
     <div>
@@ -21,8 +88,12 @@
     <br />
 
     <div>
-        <input type="submit" value="Apply Now" class="btn btn-primary" />
+        <input type="submit"
+               value="Apply Now"
+               class="btn btn-primary" />
     </div>
+
+    <br />
 
     <div>
         @Html.DisplayFor(m => m.msg)
